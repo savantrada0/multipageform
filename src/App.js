@@ -7,9 +7,11 @@ import EmployeeData from "./pages/EmployeeData";
 function App() {
   return (
     <BrowserRouter>
-      <Routes path="/" element={<Navbar />}>
-        <Route path="/" element={<EmployeeForm />} />
-        <Route path="/employeedata" element={<EmployeeData />} />
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route path="/" element={<EmployeeForm />} />
+          <Route path="/employeedata" element={<EmployeeData />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
