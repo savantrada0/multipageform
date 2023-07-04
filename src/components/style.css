@@ -1,0 +1,18 @@
+.navbar_container {
+  padding: 12px 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar_container > h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.navbar_container > .ant-btn {
+  padding: 18px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 18px;
+}

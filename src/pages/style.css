@@ -1,0 +1,100 @@
+.form_page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 62px);
+  justify-content: space-between;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 470px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heading {
+  margin: 0px;
+  font-size: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.content > p {
+  text-align: center;
+  margin: 8px 0px;
+}
+
+.form_container {
+  padding: 27px;
+  border: 1px solid #b9b6b6;
+  margin-top: 32px;
+  border-radius: 18px;
+}
+
+.progress_bar {
+  height: 60px;
+}
+
+.row {
+  display: flex;
+  margin-top: 28px;
+  gap: 15px;
+}
+
+.ant-input {
+  border-radius: 20px;
+  padding: 8px 13px;
+}
+
+.navigation_buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ant-btn {
+  padding: 17px 20px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  display: flex;
+  padding: 16px 25px;
+  justify-content: space-between;
+}
+
+.logo_wrapper > h1 {
+  margin: 0px;
+  font-size: 24px;
+}
+
+.logo_wrapper > p {
+  font-size: 12px;
+  margin: 0px;
+}
+
+.newsletter_input {
+  display: flex;
+  border: 1px solid #cfcccc;
+  border-radius: 30px;
+  padding: 7px;
+  align-items: center;
+  gap: 7px;
+}
+
+.newsletter_input > input {
+  padding: 0px;
+  height: fit-content;
+  border: none;
+  outline: none;
+  margin-left: 7px;
+}
+
+.newsletter_input > input:focus {
+  box-shadow: none;
+}

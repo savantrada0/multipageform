@@ -6,6 +6,7 @@ import Success from "../components/Success";
 import EmployeeAddress from "../components/EmployeeAddress";
 import JobInfo from "../components/JobInfo";
 import PersonalDetails from "../components/PersonalDetails";
+import "./style.css";
 
 const EmployeeForm = () => {
   const [step, setStep] = useState(1);
@@ -47,7 +48,7 @@ const EmployeeForm = () => {
   };
 
   return (
-    <div>
+    <div className="form_page">
       <div className="content">
         <h1 className="heading">Get an Employee Information</h1>
         <p>
@@ -93,7 +94,7 @@ const EmployeeForm = () => {
       </div>
       <div className="footer">
         <div className="logo_wrapper">
-          <span>Aimbrill Techinfo</span>
+          <h1>Aimbrill Techinfo</h1>
           <p>Copyright © 2021 Aimbrill Techinfo | All Rights Reserved</p>
         </div>
         <div className="newsletter_input">
