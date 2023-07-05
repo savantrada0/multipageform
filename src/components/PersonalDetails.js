@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { DatePicker, Select, Radio, Checkbox } from "antd";
+import { DatePicker,Button, Select,Steps, Radio, Checkbox, Form } from "antd";
 
-const PersonalDetails = () => {
+const PersonalDetails = ({prevStep,step,items,nextStep}) => {
   const [value1, setValue1] = useState("Apple");
   const onDateChange = (date, dateString) => {
     console.log(date, dateString);
@@ -48,6 +48,9 @@ const PersonalDetails = () => {
   };
 
   return (
+    <Form>
+<div className="form_container">
+<Steps current={step} items={items} />
     <div className="personaldetails_container">
       <DatePicker onChange={onChange} />
       <Radio.Group options={options} onChange={onChange1} value={value1} />
@@ -55,7 +58,7 @@ const PersonalDetails = () => {
         options={options1}
         defaultValue={["Pear"]}
         onChange={onDateChange}
-      />
+        />
       <Select
         showSearch
         placeholder="Select a person"
@@ -79,8 +82,18 @@ const PersonalDetails = () => {
             label: "Tom",
           },
         ]}
-      />
+        />
     </div>
+      </div>
+    <div className="navigation_buttons">
+    <Button type="primary" onClick={nextStep}>
+        Next step
+      </Button>
+        <Button type="primary" onClick={prevStep}>
+        Previous step
+        </Button>
+        </div>
+        </Form>
   );
 };
 

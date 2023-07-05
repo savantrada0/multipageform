@@ -1,7 +1,7 @@
 import React from "react";
-import { Input, Select, Space } from "antd";
+import { Input, Select,Button,Steps,Form, Space } from "antd";
 
-const JobInfo = () => {
+const JobInfo = ({prevStep,step,items,nextStep}) => {
   const options = [
     {
       value: "zhejiang",
@@ -16,6 +16,9 @@ const JobInfo = () => {
     console.log(`selected ${value}`);
   };
   return (
+    <Form>
+    <div className="form_container">
+    <Steps current={step} items={items} />
     <div className="jobinfo_container">
       <Space.Compact>
         <Input defaultValue="Xihu District, Hangzhou" />
@@ -52,6 +55,16 @@ const JobInfo = () => {
         />
       </Space.Compact>
     </div>
+    </div>
+    <div className="navigation_buttons">
+    <Button type="primary" onClick={nextStep}>
+        Next step
+      </Button>
+        <Button type="primary" onClick={prevStep}>
+        Previous step
+        </Button>
+        </div>
+        </Form>
   );
 };
 

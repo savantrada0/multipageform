@@ -9,7 +9,7 @@ import PersonalDetails from "../components/PersonalDetails";
 import "./style.css";
 
 const EmployeeForm = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -31,6 +31,14 @@ const EmployeeForm = () => {
     emptype: "",
   });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const nextStep = () => {
     setStep(step + 1);
   };
@@ -39,13 +47,42 @@ const EmployeeForm = () => {
     setStep(step - 1);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const items = [{
+    key: '1',
+  },{
+    key: '2',
+  },{
+    key: '3',
+  },{
+    key: '4',
+  }];
+
+  const steps = [
+    {
+      title: '1',
+      content: <ContactInfo values={values} step={step} items={items} nextStep={nextStep} handleChange={handleChange} />
+    },
+    {
+      title: '2',
+      content: <PersonalDetails values={values} step={step} items={items} prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} />
+    },
+    {
+      title: '3',
+      content:  <JobInfo values={values} step={step} items={items} prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} />
+    },
+    {
+      title: '4',
+      content: <EmployeeAddress values={values} step={step} items={items} prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} />
+    },
+    {
+      title: '5',
+      content: <Confirm values={values} prevStep={prevStep} nextStep={nextStep} />
+    },
+    {
+      title: '6',
+      content: <Success />
+    }
+  ]
 
   return (
     <div className="form_page">
@@ -55,42 +92,7 @@ const EmployeeForm = () => {
           Please fill the form below to receive an interview details and other
           information that is regarding the task
         </p>
-        <div className="form_container">
-          <div className="progress_bar"></div>
-          {step === 1 && (
-            <ContactInfo values={values} handleChange={handleChange} />
-          )}
-          {step === 2 && (
-            <PersonalDetails values={values} handleChange={handleChange} />
-          )}
-          {step === 3 && (
-            <JobInfo values={values} handleChange={handleChange} />
-          )}
-          {step === 4 && (
-            <EmployeeAddress values={values} handleChange={handleChange} />
-          )}
-          {step === 5 && (
-            <Confirm values={values} handleChange={handleChange} />
-          )}
-          {step === 6 && <Success />}
-        </div>
-        <div className="navigation_buttons">
-          {step !== (5 || 6) && (
-            <Button type="primary" onClick={nextStep}>
-              Next step
-            </Button>
-          )}
-          {step === 5 && (
-            <Button type="primary" onClick={nextStep}>
-              Confirm & Submit
-            </Button>
-          )}
-          {step !== (1 || 6) && (
-            <Button type="primary" onClick={prevStep}>
-              Previous step
-            </Button>
-          )}
-        </div>
+        <div>{steps[step].content}</div>
       </div>
       <div className="footer">
         <div className="logo_wrapper">
