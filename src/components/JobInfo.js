@@ -1,70 +1,121 @@
 import React from "react";
-import { Input, Select,Button,Steps,Form, Space } from "antd";
+import { Input, Select, Button, Steps, Form } from "antd";
 
-const JobInfo = ({prevStep,step,items,nextStep}) => {
-  const options = [
-    {
-      value: "zhejiang",
-      label: "Zhejiang",
-    },
-    {
-      value: "jiangsu",
-      label: "Jiangsu",
-    },
-  ];
+const { Option } = Select;
+const JobInfo = ({ prevStep, step, items, nextStep }) => {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
+  const selectAfter = (
+    <Select defaultValue="Year">
+      <Option value="Year">Year</Option>
+      <Option value="Month">Month</Option>
+    </Select>
+  );
+
   return (
-    <Form>
-    <div className="form_container">
-    <Steps current={step} items={items} />
-    <div className="jobinfo_container">
-      <Space.Compact>
-        <Input defaultValue="Xihu District, Hangzhou" />
-        <Select defaultValue="Zhejiang" options={options} />
-      </Space.Compact>
-      <Input placeholder="Basic usage" />
-      <Input placeholder="Basic usage" />
-      <Space.Compact>
-        <Select
-          defaultValue="lucy"
-          style={{
-            width: 120,
-          }}
-          onChange={handleChange}
-          options={[
-            {
-              value: "jack",
-              label: "Jack",
-            },
-            {
-              value: "lucy",
-              label: "Lucy",
-            },
-            {
-              value: "Yiminghe",
-              label: "yiminghe",
-            },
-            {
-              value: "disabled",
-              label: "Disabled",
-              disabled: true,
-            },
-          ]}
-        />
-      </Space.Compact>
-    </div>
-    </div>
-    <div className="navigation_buttons">
-    <Button type="primary" onClick={nextStep}>
-        Next step
-      </Button>
-        <Button type="primary" onClick={prevStep}>
-        Previous step
-        </Button>
+    <Form
+      autoComplete="off"
+      layout="vertical"
+      hideRequiredMark
+      onFinish={(values) => {
+        console.log(values);
+        nextStep();
+      }}
+      onFinishFailed={(error) => {
+        console.log({ error });
+      }}
+    >
+      <div className="form_container">
+        <Steps current={step} items={items} />
+        <div className="jobinfo_container">
+          <div className="row">
+            <Form.Item
+              name="experience"
+              label="Experience you have"
+              rules={[
+                {
+                  required: true,
+                  message: "Enter experience level",
+                },
+                { whitespace: true },
+              ]}
+              hasFeedback
+            >
+              <Input placeholder="1" addonAfter={selectAfter} />
+            </Form.Item>
+            <Form.Item
+              name="salary"
+              label="Your current salary"
+              rules={[
+                {
+                  required: true,
+                  message: "Provide your current salary",
+                },
+                { whitespace: true },
+              ]}
+              hasFeedback
+            >
+              <Input placeholder="500000" addonAfter="₹/year" />
+            </Form.Item>
+          </div>
+          <div className="row">
+            <Form.Item
+              name="position"
+              label="Job Position"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your name",
+                },
+                { whitespace: true },
+                { min: 3 },
+              ]}
+              hasFeedback
+            >
+              <Input placeholder="Enter your job position" />
+            </Form.Item>
+            <Form.Item
+              name="status"
+              label="Employment type"
+              rules={[
+                {
+                  required: true,
+                  message: "Select your employment type",
+                },
+              ]}
+              hasFeedback
+            >
+              <Select
+                placeholder="Status"
+                options={[
+                  {
+                    value: "Full-Time",
+                    label: "Full-Time",
+                  },
+                  {
+                    value: "Part-Time",
+                    label: "Part-Time",
+                  },
+                  {
+                    value: "Internship",
+                    label: "Internship",
+                  },
+                ]}
+              />
+            </Form.Item>
+          </div>
         </div>
-        </Form>
+      </div>
+      <div className="navigation_buttons">
+        <Button type="primary" htmlType="submit">
+          Next step
+        </Button>
+        <Button type="primary" onClick={prevStep}>
+          Previous step
+        </Button>
+      </div>
+    </Form>
   );
 };
 

@@ -16,3 +16,11 @@
   justify-content: center;
   border-radius: 18px;
 }
+
+.radio_button > .ant-row {
+  flex-flow: nowrap;
+}
+
+.radio_button > .ant-row > .ant-col {
+  width: 190px;
+}

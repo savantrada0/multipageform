@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Input } from "antd";
 import ContactInfo from "../components/ContactInfo";
 import Confirm from "../components/Confirm";
@@ -7,16 +7,19 @@ import EmployeeAddress from "../components/EmployeeAddress";
 import JobInfo from "../components/JobInfo";
 import PersonalDetails from "../components/PersonalDetails";
 import "./style.css";
+import { useDispatch } from "react-redux";
+import { getEmployees } from "../redux/slice/employeeSlice";
 
 const EmployeeForm = () => {
-  const [step, setStep] = useState(0);
+  const dispatch = useDispatch();
+  const [step, setStep] = useState(3);
   const [values, setValues] = useState({
     name: "",
     email: "",
     phone: "",
     company: "",
     dob: "",
-    maritalstatus: "",
+    technologies: "",
     gender: "",
     education: "",
     address: "",
@@ -29,6 +32,10 @@ const EmployeeForm = () => {
     department: "",
     experience: "",
     emptype: "",
+  });
+
+  useEffect(() => {
+    dispatch(getEmployees());
   });
 
   const handleChange = (e) => {
@@ -47,42 +54,84 @@ const EmployeeForm = () => {
     setStep(step - 1);
   };
 
-  const items = [{
-    key: '1',
-  },{
-    key: '2',
-  },{
-    key: '3',
-  },{
-    key: '4',
-  }];
+  const items = [
+    {
+      key: "1",
+    },
+    {
+      key: "2",
+    },
+    {
+      key: "3",
+    },
+    {
+      key: "4",
+    },
+  ];
 
   const steps = [
     {
-      title: '1',
-      content: <ContactInfo values={values} step={step} items={items} nextStep={nextStep} handleChange={handleChange} />
+      title: "1",
+      content: (
+        <ContactInfo
+          values={values}
+          step={step}
+          items={items}
+          nextStep={nextStep}
+          handleChange={handleChange}
+        />
+      ),
     },
     {
-      title: '2',
-      content: <PersonalDetails values={values} step={step} items={items} prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} />
+      title: "2",
+      content: (
+        <PersonalDetails
+          values={values}
+          step={step}
+          items={items}
+          prevStep={prevStep}
+          nextStep={nextStep}
+          handleChange={handleChange}
+        />
+      ),
     },
     {
-      title: '3',
-      content:  <JobInfo values={values} step={step} items={items} prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} />
+      title: "3",
+      content: (
+        <JobInfo
+          values={values}
+          step={step}
+          items={items}
+          prevStep={prevStep}
+          nextStep={nextStep}
+          handleChange={handleChange}
+        />
+      ),
     },
     {
-      title: '4',
-      content: <EmployeeAddress values={values} step={step} items={items} prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} />
+      title: "4",
+      content: (
+        <EmployeeAddress
+          values={values}
+          step={step}
+          items={items}
+          prevStep={prevStep}
+          nextStep={nextStep}
+          handleChange={handleChange}
+        />
+      ),
     },
     {
-      title: '5',
-      content: <Confirm values={values} prevStep={prevStep} nextStep={nextStep} />
+      title: "5",
+      content: (
+        <Confirm values={values} prevStep={prevStep} nextStep={nextStep} />
+      ),
     },
     {
-      title: '6',
-      content: <Success />
-    }
-  ]
+      title: "6",
+      content: <Success />,
+    },
+  ];
 
   return (
     <div className="form_page">

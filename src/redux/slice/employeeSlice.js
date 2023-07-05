@@ -1,17 +1,53 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import Api from "../api";
+
+export const addEmployee = createAsyncThunk(
+  "/employees/addemployee",
+  async (data) => {
+    const employee = await Api.post(`/api/employees/addemployee`, data);
+    console.log(employee.data);
+    return employee.data;
+  }
+);
+
+export const getEmployees = createAsyncThunk(
+  "/employees/getallemployees",
+  async () => {
+    const employees = await Api.get("/api/employees/getallemployees");
+    return employees.data;
+  }
+);
 
 const employeeSlice = createSlice({
-  name: "employee",
+  name: "employees",
   initialState: {
-    data: [],
+    employees: [],
+    loading: false,
+    error: null,
   },
-  reducers: {
-    employeeDetails: (state, { payload }) => {
-      state.data = payload;
+  reducers: {},
+  extraReducers: {
+    [getEmployees.pending]: (state) => {
+      state.loading = true;
+    },
+    [getEmployees.fulfilled]: (state, { payload }) => {
+      state.employees = payload;
+    },
+    [getEmployees.rejected]: (state, { payload }) => {
+      state.error = payload;
+      state.loading = false;
+    },
+    [addEmployee.pending]: (state) => {
+      state.loading = true;
+    },
+    [addEmployee.fulfilled]: (state, { payload }) => {
+      console.log(payload);
+    },
+    [addEmployee.rejected]: (state, { payload }) => {
+      state.error = payload;
+      state.loading = false;
     },
   },
 });
 
 export const employeeReducer = employeeSlice.reducer;
-
-export const { emp } = employeeSlice.actions;
