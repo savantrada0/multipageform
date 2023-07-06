@@ -93,3 +93,11 @@
 .newsletter_input > input:focus {
   box-shadow: none;
 }
+
+.ant-table-pagination-right {
+  justify-content: flex-start !important;
+}
+
+.data_table {
+  margin: 20px;
+}

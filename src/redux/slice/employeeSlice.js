@@ -32,6 +32,7 @@ const employeeSlice = createSlice({
     },
     [getEmployees.fulfilled]: (state, { payload }) => {
       state.employees = payload;
+      state.loading = false;
     },
     [getEmployees.rejected]: (state, { payload }) => {
       state.error = payload;
@@ -41,7 +42,7 @@ const employeeSlice = createSlice({
       state.loading = true;
     },
     [addEmployee.fulfilled]: (state, { payload }) => {
-      console.log(payload);
+      state.loading = false;
     },
     [addEmployee.rejected]: (state, { payload }) => {
       state.error = payload;

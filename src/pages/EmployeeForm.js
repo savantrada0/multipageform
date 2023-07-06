@@ -12,7 +12,7 @@ import { getEmployees } from "../redux/slice/employeeSlice";
 
 const EmployeeForm = () => {
   const dispatch = useDispatch();
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(0);
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -75,6 +75,7 @@ const EmployeeForm = () => {
       content: (
         <ContactInfo
           values={values}
+          setValues={setValues}
           step={step}
           items={items}
           nextStep={nextStep}
