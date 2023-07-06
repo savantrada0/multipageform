@@ -1,7 +1,7 @@
 .form_page {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 62px);
+  min-height: calc(100vh - 62px);
   justify-content: space-between;
 }
 
@@ -46,6 +46,7 @@
 .navigation_buttons {
   margin-top: 20px;
   display: flex;
+  gap: 10px;
   justify-content: flex-end;
 }
 
@@ -100,4 +101,34 @@
 
 .data_table {
   margin: 20px;
+}
+
+@media only screen and (max-width: 574px) {
+  .heading{
+    font-size: 16px;
+  }
+  .content>p{
+    font-size: 12px;
+  }
+  .form_container{
+    display: flex;
+    justify-content: center;
+  }
+  .ant-steps{
+    width: auto;
+  }
+  .row{
+    flex-direction: column;
+    gap: 0px;
+  }
+  .footer{
+    flex-direction: column;
+    gap: 12px;
+  }
+  .logo_wrapper{
+    text-align: center;
+  }
+  .content{
+    margin: 10px;
+  }
 }

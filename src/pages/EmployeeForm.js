@@ -18,8 +18,8 @@ const EmployeeForm = () => {
     email: "",
     phone: "",
     company: "",
-    dob: "",
-    technologies: "",
+    dob: null,
+    technologies: [],
     gender: "",
     education: "",
     address: "",
@@ -29,9 +29,7 @@ const EmployeeForm = () => {
     pincode: "",
     salary: "",
     position: "",
-    department: "",
     experience: "",
-    emptype: "",
   });
 
   useEffect(() => {
@@ -88,6 +86,7 @@ const EmployeeForm = () => {
       content: (
         <PersonalDetails
           values={values}
+          setValues={setValues}
           step={step}
           items={items}
           prevStep={prevStep}
@@ -101,6 +100,7 @@ const EmployeeForm = () => {
       content: (
         <JobInfo
           values={values}
+          setValues={setValues}
           step={step}
           items={items}
           prevStep={prevStep}
@@ -114,6 +114,7 @@ const EmployeeForm = () => {
       content: (
         <EmployeeAddress
           values={values}
+          setValues={setValues}
           step={step}
           items={items}
           prevStep={prevStep}
@@ -137,11 +138,14 @@ const EmployeeForm = () => {
   return (
     <div className="form_page">
       <div className="content">
+        {(step!==(4|5)) && (<>
         <h1 className="heading">Get an Employee Information</h1>
         <p>
           Please fill the form below to receive an interview details and other
           information that is regarding the task
         </p>
+        </>
+        )}
         <div>{steps[step].content}</div>
       </div>
       <div className="footer">
@@ -150,7 +154,7 @@ const EmployeeForm = () => {
           <p>Copyright © 2021 Aimbrill Techinfo | All Rights Reserved</p>
         </div>
         <div className="newsletter_input">
-          <Input defaultValue="Combine input and button" />
+          <Input defaultValue="Enter your email" />
           <Button type="primary">Submit</Button>
         </div>
       </div>

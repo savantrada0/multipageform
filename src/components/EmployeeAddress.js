@@ -1,26 +1,46 @@
 import React from "react";
 import { Input, Button, Steps, Form } from "antd";
+import "./style.css";
 const { TextArea } = Input;
 
-const EmployeeAddress = ({ prevStep, step, items, nextStep }) => {
+const EmployeeAddress = ({
+  prevStep,
+  step,
+  items,
+  nextStep,
+  values,
+  setValues,
+}) => {
+  const onFinish = (valuesform) => {
+    nextStep();
+    console.log(values);
+  };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
   return (
     <Form
       autoComplete="off"
       layout="vertical"
-      hideRequiredMark
-      onFinish={(values) => {
-        console.log(values);
-        nextStep();
-      }}
-      onFinishFailed={(error) => {
-        console.log({ error });
+      onFinish={onFinish}
+      initialValues={{
+        address: values.address,
+        city: values.city,
+        state: values.state,
+        country: values.country,
+        pincode: values.pincode,
       }}
     >
       <div className="form_container">
         <Steps current={step} items={items} />
         <div className="address_container">
           <Form.Item
-            name="address"
+            name={"address"}
             label="Enter your address"
             rules={[
               {
@@ -30,7 +50,7 @@ const EmployeeAddress = ({ prevStep, step, items, nextStep }) => {
               { whitespace: true },
               { min: 10 },
             ]}
-            hasFeedback
+            onChange={handleChange}
           >
             <TextArea
               placeholder="Enter your address"
@@ -42,22 +62,15 @@ const EmployeeAddress = ({ prevStep, step, items, nextStep }) => {
           </Form.Item>
           <div className="row">
             <Form.Item
-              name="city"
+              name={"city"}
               label="Enter your city"
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter city name",
-                },
-                { whitespace: true },
-                { min: 3 },
-              ]}
-              hasFeedback
+              requiredMark="optional"
+              onChange={handleChange}
             >
               <Input placeholder="City" />
             </Form.Item>
             <Form.Item
-              name="state"
+              name={"state"}
               label="Enter your state"
               rules={[
                 {
@@ -67,14 +80,14 @@ const EmployeeAddress = ({ prevStep, step, items, nextStep }) => {
                 { whitespace: true },
                 { min: 3 },
               ]}
-              hasFeedback
+              onChange={handleChange}
             >
               <Input placeholder="State" />
             </Form.Item>
           </div>
           <div className="row">
             <Form.Item
-              name="country"
+              name={"country"}
               label="Enter your country"
               rules={[
                 {
@@ -84,12 +97,12 @@ const EmployeeAddress = ({ prevStep, step, items, nextStep }) => {
                 { whitespace: true },
                 { min: 3 },
               ]}
-              hasFeedback
+              onChange={handleChange}
             >
               <Input placeholder="Country" />
             </Form.Item>
             <Form.Item
-              name="pincode"
+              name={"pincode"}
               label="Enter your pincode"
               rules={[
                 {
@@ -99,7 +112,7 @@ const EmployeeAddress = ({ prevStep, step, items, nextStep }) => {
                 { whitespace: true },
                 { min: 6 },
               ]}
-              hasFeedback
+              onChange={handleChange}
             >
               <Input placeholder="Pincode" />
             </Form.Item>

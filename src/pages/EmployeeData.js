@@ -64,7 +64,7 @@ const columns = [
 const EmployeeData = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(7);
   const dispatch = useDispatch();
 
   const response = useSelector((state) => state.employees);

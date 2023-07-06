@@ -1,50 +1,32 @@
-import React, { useState } from "react";
-import { Input, Steps, Form, Button, Spin } from "antd";
-import { UserOutlined, MailOutlined } from "@ant-design/icons";
+import React from "react";
+import { Input, Steps, Form, Button } from "antd";
+import { UserOutlined, MailOutlined ,MobileOutlined,HomeOutlined} from "@ant-design/icons";
+import "./style.css"
 
 const ContactInfo = ({ values, step, items, nextStep, setValues }) => {
-  const [loading, setLoading] = useState(false);
-  //  const [form] = Form.useForm();
   const onFinish = (valuesform) => {
-    //api call
-    //form.resetFields();
-    // form.setFieldValue({
-    //   name:""
-    // })
     nextStep();
     console.log(values);
   };
-  const onFinishFailed = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 200);
-  };
-
   const handleChange = (e) => {
     const { id, value } = e.target;
-    // form.setFieldValue({
-    //   name: value,
-    // });
     setValues((prev) => ({
       ...prev,
       [id]: value,
     }));
   };
-  console.log(values);
   return (
-    <Spin spinning={loading}>
       <Form
         autoComplete="off"
         layout="vertical"
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         initialValues={{
           name: values.name,
           phone: values.phone,
           email: values.email,
           company: values.company,
         }}
+        hideRequiredMark
       >
         <div className="form_container">
           <Steps current={step} items={items} />
@@ -61,7 +43,6 @@ const ContactInfo = ({ values, step, items, nextStep, setValues }) => {
                   { whitespace: true },
                   { min: 3 },
                 ]}
-                hasFeedback
               >
                 <Input
                   placeholder="Enter your name"
@@ -79,7 +60,6 @@ const ContactInfo = ({ values, step, items, nextStep, setValues }) => {
                   },
                   { type: "email", message: "Please enter a valid email" },
                 ]}
-                hasFeedback
               >
                 <Input
                   placeholder="Enter mail address"
@@ -99,11 +79,10 @@ const ContactInfo = ({ values, step, items, nextStep, setValues }) => {
                   },
                   { min: 10 },
                 ]}
-                hasFeedback
               >
                 <Input
                   placeholder="Enter your contact"
-                  suffix={<UserOutlined />}
+                  suffix={<MobileOutlined />}
                   onChange={handleChange}
                 />
               </Form.Item>
@@ -118,11 +97,10 @@ const ContactInfo = ({ values, step, items, nextStep, setValues }) => {
                   { whitespace: true },
                   { min: 3 },
                 ]}
-                hasFeedback
               >
                 <Input
                   placeholder="Company name"
-                  suffix={<UserOutlined />}
+                  suffix={<HomeOutlined />}
                   onChange={handleChange}
                 />
               </Form.Item>
@@ -135,7 +113,6 @@ const ContactInfo = ({ values, step, items, nextStep, setValues }) => {
           </Button>
         </div>
       </Form>
-    </Spin>
   );
 };
 

@@ -1,6 +1,7 @@
 .navbar_container {
   padding: 12px 25px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -17,10 +18,38 @@
   border-radius: 18px;
 }
 
+.navbar_container>span>span>.ant-input{
+  border-radius: 4px;
+  padding: 4px;
+}
+
 .radio_button > .ant-row {
   flex-flow: nowrap;
 }
 
 .radio_button > .ant-row > .ant-col {
   width: 190px;
+}
+
+.navbar_container>a{
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 574px) {
+  .navbar_container>h1{
+    font-size: 16px;
+  }
+  .navbar_container>a>button{
+    padding: 10px 10px;
+    font-size: 13px;
+  }
+  .heading{
+    font-size: 16px;
+  }
+  .content>p{
+    font-size: 12px;
+  }
+  .radio_button > .ant-row {
+    flex-flow: row wrap;
+  }
 }

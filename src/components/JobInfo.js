@@ -1,29 +1,38 @@
 import React from "react";
 import { Input, Select, Button, Steps, Form } from "antd";
+import "./style.css"
 
-const { Option } = Select;
-const JobInfo = ({ prevStep, step, items, nextStep }) => {
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+const JobInfo = ({ prevStep, step, items, nextStep, values, setValues }) => {
+  const onFinish = (valuesform) => {
+    nextStep();
+    console.log(values);
   };
-  const selectAfter = (
-    <Select defaultValue="Year">
-      <Option value="Year">Year</Option>
-      <Option value="Month">Month</Option>
-    </Select>
-  );
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const onSelectChange = (value) => {
+    setValues((prev) => ({
+      ...prev,
+      status: value,
+    }));
+  };
 
   return (
     <Form
       autoComplete="off"
       layout="vertical"
       hideRequiredMark
-      onFinish={(values) => {
-        console.log(values);
-        nextStep();
-      }}
-      onFinishFailed={(error) => {
-        console.log({ error });
+      onFinish={onFinish}
+      initialValues={{
+        experience: values.experience,
+        salary: values.salary,
+        position: values.position,
+        status: values.status,
       }}
     >
       <div className="form_container">
@@ -31,7 +40,7 @@ const JobInfo = ({ prevStep, step, items, nextStep }) => {
         <div className="jobinfo_container">
           <div className="row">
             <Form.Item
-              name="experience"
+              name={"experience"}
               label="Experience you have"
               rules={[
                 {
@@ -40,12 +49,12 @@ const JobInfo = ({ prevStep, step, items, nextStep }) => {
                 },
                 { whitespace: true },
               ]}
-              hasFeedback
+              onChange={handleChange}
             >
-              <Input placeholder="1" addonAfter={selectAfter} />
+              <Input placeholder="1" addonAfter="year"/>
             </Form.Item>
             <Form.Item
-              name="salary"
+              name={"salary"}
               label="Your current salary"
               rules={[
                 {
@@ -54,14 +63,14 @@ const JobInfo = ({ prevStep, step, items, nextStep }) => {
                 },
                 { whitespace: true },
               ]}
-              hasFeedback
+              onChange={handleChange}
             >
               <Input placeholder="500000" addonAfter="₹/year" />
             </Form.Item>
           </div>
           <div className="row">
             <Form.Item
-              name="position"
+              name={"position"}
               label="Job Position"
               rules={[
                 {
@@ -71,12 +80,12 @@ const JobInfo = ({ prevStep, step, items, nextStep }) => {
                 { whitespace: true },
                 { min: 3 },
               ]}
-              hasFeedback
+              onChange={handleChange}
             >
               <Input placeholder="Enter your job position" />
             </Form.Item>
             <Form.Item
-              name="status"
+              name={"status"}
               label="Employment type"
               rules={[
                 {
@@ -84,9 +93,9 @@ const JobInfo = ({ prevStep, step, items, nextStep }) => {
                   message: "Select your employment type",
                 },
               ]}
-              hasFeedback
-            >
+              >
               <Select
+              onChange={onSelectChange}
                 placeholder="Status"
                 options={[
                   {

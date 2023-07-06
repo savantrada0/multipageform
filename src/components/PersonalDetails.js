@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.css";
 import { DatePicker, Button, Select, Steps, Radio, Checkbox, Form } from "antd";
 
-const PersonalDetails = ({ prevStep, step, items, nextStep }) => {
-  const onDateChange = (date, dateString) => {
-    console.log(date, dateString);
+const PersonalDetails = ({
+  prevStep,
+  step,
+  items,
+  nextStep,
+  values,
+  setValues,
+}) => {
+  const onFinish = (valuesform) => {
+    nextStep();
+    console.log(values);
   };
-  const onChange1 = ({ target: { value } }) => {
-    console.log("radio1 checked", value);
+  const handleChange = (e) => {
+    setValues((prev) => ({
+      ...prev,
+      gender: e.target.value,
+    }));
   };
+  console.log(values);
+
   const options = [
     {
       label: "Male",
@@ -39,28 +52,46 @@ const PersonalDetails = ({ prevStep, step, items, nextStep }) => {
     },
   ];
 
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
+  const onDateChange = (date, dateString) => {
+    setValues((prev) => ({
+      ...prev,
+      dob: date,
+    }));
+  };
+
+  const onSelectChange = (value) => {
+    setValues((prev) => ({
+      ...prev,
+      education: value,
+    }));
+  };
+
+  const handleCheckbox = (checkedValues) => {
+    setValues((prev) => ({
+      ...prev,
+      technologies: checkedValues,
+    }));
   };
 
   return (
     <Form
       autoComplete="off"
       layout="vertical"
-      onFinish={(values) => {
-        console.log(values);
-        nextStep();
+      onFinish={onFinish}
+      initialValues={{
+        dob: values.dob ,
+        education: values.education,
+        gender: values.gender,
+        technologies: values.technologies,
       }}
-      onFinishFailed={(error) => {
-        console.log({ error });
-      }}
+      hideRequiredMark
     >
       <div className="form_container">
         <Steps current={step} items={items} />
         <div className="personaldetails_container">
           <div className="row">
             <Form.Item
-              name="dob"
+              name={"dob"}
               label="Date of Birth"
               rules={[
                 {
@@ -70,10 +101,16 @@ const PersonalDetails = ({ prevStep, step, items, nextStep }) => {
               ]}
               hasFeedback
             >
-              <DatePicker picker="date" placeholder="Choose BirthDate" />
+              <DatePicker
+                onChange={onDateChange}
+                picker="date"
+                placeholder="Choose BirthDate"
+                inputReadOnly
+                value={values.dob}
+              />
             </Form.Item>
             <Form.Item
-              name="education"
+              name={"education"}
               label="Select your highest education"
               rules={[
                 {
@@ -85,13 +122,7 @@ const PersonalDetails = ({ prevStep, step, items, nextStep }) => {
             >
               <Select
                 placeholder="Select one"
-                showSearch
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  (option?.label ?? "")
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-                }
+                onChange={onSelectChange}
                 options={[
                   {
                     value: "M.Tech",
@@ -114,7 +145,7 @@ const PersonalDetails = ({ prevStep, step, items, nextStep }) => {
             </Form.Item>
           </div>
           <Form.Item
-            name="gender"
+            name={"gender"}
             label="Select your Gender"
             rules={[
               {
@@ -125,10 +156,10 @@ const PersonalDetails = ({ prevStep, step, items, nextStep }) => {
             className="radio_button"
             hasFeedback
           >
-            <Radio.Group options={options} />
+            <Radio.Group value={values.gender} onChange={handleChange} options={options} />
           </Form.Item>
           <Form.Item
-            name="technologies"
+            name={"technologies"}
             label="Select your technologies"
             rules={[
               {
@@ -139,7 +170,7 @@ const PersonalDetails = ({ prevStep, step, items, nextStep }) => {
             className="radio_button"
             hasFeedback
           >
-            <Checkbox.Group options={options1} />
+            <Checkbox.Group onChange={handleCheckbox} options={options1} />
           </Form.Item>
         </div>
       </div>
