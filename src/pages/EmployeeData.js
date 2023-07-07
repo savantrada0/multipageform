@@ -71,20 +71,20 @@ const EmployeeData = () => {
 
   const data = response.employees;
   const loading = response.loading;
-  console.log(response.employees);
 
   useEffect(() => {
     dispatch(getEmployees());
   }, [dispatch]);
 
   const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
+
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
   };
+
   return (
     <Table
       rowSelection={rowSelection}

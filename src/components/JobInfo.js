@@ -5,8 +5,8 @@ import "./style.css"
 const JobInfo = ({ prevStep, step, items, nextStep, values, setValues }) => {
   const onFinish = (valuesform) => {
     nextStep();
-    console.log(values);
   };
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setValues((prev) => ({

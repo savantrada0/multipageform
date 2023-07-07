@@ -4,10 +4,10 @@ import { UserOutlined, MailOutlined ,MobileOutlined,HomeOutlined} from "@ant-des
 import "./style.css"
 
 const ContactInfo = ({ values, step, items, nextStep, setValues }) => {
-  const onFinish = (valuesform) => {
+  const onFinish = () => {
     nextStep();
-    console.log(values);
   };
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setValues((prev) => ({
@@ -15,6 +15,7 @@ const ContactInfo = ({ values, step, items, nextStep, setValues }) => {
       [id]: value,
     }));
   };
+
   return (
       <Form
         autoComplete="off"

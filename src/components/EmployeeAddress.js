@@ -13,7 +13,6 @@ const EmployeeAddress = ({
 }) => {
   const onFinish = (valuesform) => {
     nextStep();
-    console.log(values);
   };
 
   const handleChange = (e) => {
@@ -23,6 +22,7 @@ const EmployeeAddress = ({
       [id]: value,
     }));
   };
+  
   return (
     <Form
       autoComplete="off"

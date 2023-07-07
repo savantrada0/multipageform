@@ -12,15 +12,14 @@ const PersonalDetails = ({
 }) => {
   const onFinish = (valuesform) => {
     nextStep();
-    console.log(values);
   };
+
   const handleChange = (e) => {
     setValues((prev) => ({
       ...prev,
       gender: e.target.value,
     }));
   };
-  console.log(values);
 
   const options = [
     {

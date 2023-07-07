@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Input } from "antd";
 import ContactInfo from "../components/ContactInfo";
 import Confirm from "../components/Confirm";
@@ -7,11 +7,8 @@ import EmployeeAddress from "../components/EmployeeAddress";
 import JobInfo from "../components/JobInfo";
 import PersonalDetails from "../components/PersonalDetails";
 import "./style.css";
-import { useDispatch } from "react-redux";
-import { getEmployees } from "../redux/slice/employeeSlice";
 
 const EmployeeForm = () => {
-  const dispatch = useDispatch();
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({
     name: "",
@@ -30,10 +27,6 @@ const EmployeeForm = () => {
     salary: "",
     position: "",
     experience: "",
-  });
-
-  useEffect(() => {
-    dispatch(getEmployees());
   });
 
   const handleChange = (e) => {

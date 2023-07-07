@@ -1,19 +1,19 @@
 import React from "react";
 import { Form, Button,Table } from "antd";
 import { useDispatch } from "react-redux";
-import { addEmployee } from "../redux/slice/employeeSlice";
 import dayjs from "dayjs";
+import { addEmployee } from "../redux/slice/employeeSlice";
 import "./style.css"
 
 const Confirm = ({ nextStep, prevStep,values }) => {
   const dispatch = useDispatch();
-  console.log(values);
+
   const onFinish = () => {
     const dateofbirth = dayjs(values.dob).format("YYYY-MM-DD");
     const salary = values.salary+"/year";
     const experience = values.experience+" year";
     const data = {
-      name: values.name,
+    name: values.name,
     email: values.email,
     phone: values.phone,
     company: values.company,
@@ -35,8 +35,6 @@ const Confirm = ({ nextStep, prevStep,values }) => {
     nextStep();
   };
 
-
-
   const columns = [
     {
       title: 'Feild',
@@ -49,6 +47,7 @@ const Confirm = ({ nextStep, prevStep,values }) => {
       key: 'value',
     },
   ];
+  
   const data = [
     {
       key: '1',
