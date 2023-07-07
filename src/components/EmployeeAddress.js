@@ -22,7 +22,7 @@ const EmployeeAddress = ({
       [id]: value,
     }));
   };
-  
+
   return (
     <Form
       autoComplete="off"
@@ -114,7 +114,7 @@ const EmployeeAddress = ({
               ]}
               onChange={handleChange}
             >
-              <Input placeholder="Pincode" />
+              <Input type="number" placeholder="Pincode" />
             </Form.Item>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Input, Select, Button, Steps, Form } from "antd";
-import "./style.css"
+import "./style.css";
 
 const JobInfo = ({ prevStep, step, items, nextStep, values, setValues }) => {
   const onFinish = (valuesform) => {
@@ -51,7 +51,7 @@ const JobInfo = ({ prevStep, step, items, nextStep, values, setValues }) => {
               ]}
               onChange={handleChange}
             >
-              <Input placeholder="1" addonAfter="year"/>
+              <Input placeholder="1" type="number" addonAfter="year" />
             </Form.Item>
             <Form.Item
               name={"salary"}
@@ -65,7 +65,7 @@ const JobInfo = ({ prevStep, step, items, nextStep, values, setValues }) => {
               ]}
               onChange={handleChange}
             >
-              <Input placeholder="500000" addonAfter="₹/year" />
+              <Input placeholder="500000" type="number" addonAfter="₹/year" />
             </Form.Item>
           </div>
           <div className="row">
@@ -93,9 +93,9 @@ const JobInfo = ({ prevStep, step, items, nextStep, values, setValues }) => {
                   message: "Select your employment type",
                 },
               ]}
-              >
+            >
               <Select
-              onChange={onSelectChange}
+                onChange={onSelectChange}
                 placeholder="Status"
                 options={[
                   {

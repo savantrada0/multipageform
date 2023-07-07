@@ -5,7 +5,6 @@ export const addEmployee = createAsyncThunk(
   "/employees/addemployee",
   async (data) => {
     const employee = await Api.post(`/addemployee`, data);
-    console.log(employee.data);
     return employee.data;
   }
 );
