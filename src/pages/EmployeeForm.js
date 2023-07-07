@@ -147,7 +147,7 @@ const EmployeeForm = () => {
           <p>Copyright © 2021 Aimbrill Techinfo | All Rights Reserved</p>
         </div>
         <div className="newsletter_input">
-          <Input defaultValue="Enter your email" />
+          <Input placeholder="Enter your email" />
           <Button type="primary">Submit</Button>
         </div>
       </div>
