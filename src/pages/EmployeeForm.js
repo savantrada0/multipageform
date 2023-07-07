@@ -131,7 +131,7 @@ const EmployeeForm = () => {
   return (
     <div className="form_page">
       <div className="content">
-        {(step!==(4|5)) && (<>
+        {((step!==4) && (step!==5)) && (<>
         <h1 className="heading">Get an Employee Information</h1>
         <p>
           Please fill the form below to receive an interview details and other
